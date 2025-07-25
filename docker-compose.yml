@@ -1,0 +1,55 @@
+services:
+
+  usersdb:
+    image: postgres:16
+    container_name: usersdb
+    environment:
+      POSTGRES_DB: usersdb
+      POSTGRES_USER: ${USERS_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${USERS_DATASOURCE_PASSWORD}
+    ports:
+      - "5432:5432"
+    networks:
+      - ticketup-network
+
+  ticketdb:
+    image: postgres:16
+    container_name: ticketdb
+    environment:
+      POSTGRES_DB: ticketdb
+      POSTGRES_USER: ${TICKET_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${TICKET_DATASOURCE_PASSWORD}
+    ports:
+      - "5433:5432"
+    networks:
+      - ticketup-network
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    ports:
+      - "15432:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - usersdb
+      - ticketdb
+    networks:
+      - ticketup-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+    networks:
+      - ticketup-network
+
+networks:
+  ticketup-network:
+    driver: bridge

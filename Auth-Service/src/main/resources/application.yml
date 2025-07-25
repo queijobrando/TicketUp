@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Auth-Service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/usersdb
+    driver-class-name: org.postgresql.Driver
+    username: ${USERS_DATASOURCE_USERNAME}
+    password: ${USERS_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+jwt:
+  public:
+    key: classpath:app.pub
+  private:
+    key: classpath:app.key
