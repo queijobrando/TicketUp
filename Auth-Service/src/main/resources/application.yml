@@ -23,3 +23,7 @@ jwt:
 default:
   admin:
     password: ${DEFAULT_ADMIN_PASSWORD}
+
+logging:
+  level:
+    org.springframework.security: DEBUG

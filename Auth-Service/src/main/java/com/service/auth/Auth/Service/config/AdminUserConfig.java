@@ -5,7 +5,6 @@ import com.service.auth.Auth.Service.model.Usuario;
 import com.service.auth.Auth.Service.model.enun.RoleValues;
 import com.service.auth.Auth.Service.repository.RoleRepository;
 import com.service.auth.Auth.Service.repository.UsuarioRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +37,7 @@ public class AdminUserConfig implements CommandLineRunner {
             Usuario usuario = new Usuario();
             usuario.setLogin("admin");
             usuario.setNome("Admin");
+            usuario.setEmail("admin@admin.com");
             usuario.setSenha(passwordEncoder.encode(senha));
             usuario.setRole(adminRole);
 
