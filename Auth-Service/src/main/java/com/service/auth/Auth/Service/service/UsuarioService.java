@@ -19,11 +19,11 @@ public class UsuarioService {
     public LoginResponseDto autenticarUsuario(LoginRequestDto dto){
         var usuario = usuarioRepository.findByLogin(dto.login());
 
-        if (usuario.isEmpty() || usuario.get().isLoginCorrect(dto, bCryptPasswordEncoder)){
+        if (usuario.isEmpty() || !usuario.get().isLoginCorrect(dto, bCryptPasswordEncoder)){
             throw new BadCredentialsException("Usuario ou senha inválido!");
         }
 
-        var jwtValue = tokenJwtService.generateTokenClaimSet(usuario.get().getId());
+        var jwtValue = tokenJwtService.generateTokenClaimSet(usuario.get().getNome(), usuario.get().getRole().getNome());
 
         return new LoginResponseDto(jwtValue);
     }

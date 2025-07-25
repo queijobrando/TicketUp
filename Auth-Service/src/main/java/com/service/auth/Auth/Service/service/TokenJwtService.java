@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -15,12 +16,13 @@ public class TokenJwtService {
 
     private final JwtEncoder jwtEncoder;
 
-    public String generateTokenClaimSet(UUID userId){
+    public String generateTokenClaimSet(String nome, String role){
         var expiresIn = 3000L; // Tempo de expiração
 
         var claims = JwtClaimsSet.builder()
                     .issuer("authService")
-                    .subject(userId.toString())
+                    .subject(nome)
+                    .claim("authorities", List.of("ROLE_" + role.toUpperCase()))
                     .issuedAt(Instant.now())
                     .expiresAt(Instant.now().plusSeconds(expiresIn))
                     .build();

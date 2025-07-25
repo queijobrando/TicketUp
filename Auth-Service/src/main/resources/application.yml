@@ -19,3 +19,7 @@ jwt:
     key: classpath:app.pub
   private:
     key: classpath:app.key
+
+default:
+  admin:
+    password: ${DEFAULT_ADMIN_PASSWORD}

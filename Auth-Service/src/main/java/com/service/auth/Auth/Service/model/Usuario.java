@@ -23,6 +23,9 @@ public class Usuario {
     @Column(unique = true)
     private String login;
 
+    @Column(nullable = false)
+    private String nome;
+
     private String senha;
 
     @ManyToOne(fetch = FetchType.EAGER)
