@@ -24,6 +24,18 @@ services:
     networks:
       - ticketup-network
 
+  maildb:
+    image: postgres:16
+    container_name: maildb
+    environment:
+      POSTGRES_DB: maildb
+      POSTGRES_USER: ${MAIL_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${MAIL_DATASOURCE_PASSWORD}
+    ports:
+      - "5434:5432"
+    networks:
+      - ticketup-network
+
   pgadmin4:
     image: dpage/pgadmin4
     container_name: pgadmin4

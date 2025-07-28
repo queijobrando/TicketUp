@@ -1,11 +1,13 @@
 package com.service.auth.Auth.Service.dto;
 
-public record RegisterRequestDto(
+import java.util.UUID;
+
+public record UsuarioInfoDto(
+        UUID id,
         String login,
         String nome,
         String sobrenome,
         String email,
-        String senha,
         String role
 ) {
 }

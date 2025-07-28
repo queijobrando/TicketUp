@@ -27,10 +27,15 @@ public class Usuario {
     private String nome;
 
     @Column(nullable = false)
+    private String sobrenome;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String senha;
+
+    private boolean integrado;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)

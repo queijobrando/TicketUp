@@ -37,6 +37,8 @@ public class AdminUserConfig implements CommandLineRunner {
             Usuario usuario = new Usuario();
             usuario.setLogin("admin");
             usuario.setNome("Admin");
+            usuario.setSobrenome("Admin");
+            usuario.setIntegrado(true);
             usuario.setEmail("admin@admin.com");
             usuario.setSenha(passwordEncoder.encode(senha));
             usuario.setRole(adminRole);

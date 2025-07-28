@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: Mail-Service
+  datasource:
+    url: jdbc:postgresql://localhost:5434/maildb
+    driver-class-name: org.postgresql.Driver
+    username: ${MAIL_DATASOURCE_USERNAME}
+    password: ${MAIL_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASS}
+rabbitmq:
+  usuario:
+    exchange: usuario.v1.exchange
+    queue: cadastro-usuario.ms-mail-service
+    routingkey: usuario.cadastrado
+  ticket:
+    queue: novo-ticket.ms-mail-service
+    exchange: ticket.v1.exchange
+    routingkey: ticket.criado
+server:
+  port: 8081
