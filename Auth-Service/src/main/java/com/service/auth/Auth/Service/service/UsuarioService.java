@@ -42,7 +42,7 @@ public class UsuarioService {
             throw new BadCredentialsException("Usuario ou senha inválido!");
         }
 
-        var jwtValue = tokenJwtService.generateTokenClaimSet(usuario.get().getNome(), usuario.get().getSobrenome(), usuario.get().getRole().getNome());
+        var jwtValue = tokenJwtService.generateTokenClaimSet(usuario.get().getLogin(), usuario.get().getNome(), usuario.get().getSobrenome(), usuario.get().getRole().getNome());
 
         return new LoginResponseDto(jwtValue);
     }

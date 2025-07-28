@@ -16,16 +16,18 @@ public class TokenJwtService {
 
     private final JwtEncoder jwtEncoder;
 
-    public String generateTokenClaimSet(String nome, String sobrenome, String role){
+    public String generateTokenClaimSet(String login, String nome, String sobrenome, String role){
         var expiresIn = 3000L; // Tempo de expiração
 
         var claims = JwtClaimsSet.builder()
-                    .issuer("authService")
-                    .subject(nome + " " + sobrenome)
-                    .claim("authorities", List.of("ROLE_" + role.toUpperCase()))
-                    .issuedAt(Instant.now())
-                    .expiresAt(Instant.now().plusSeconds(expiresIn))
-                    .build();
+                .issuer("authService")
+                .subject(login)
+                .claim("nome", nome)
+                .claim("sobrenome", sobrenome)
+                .claim("authorities", List.of("ROLE_" + role.toUpperCase()))
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now().plusSeconds(expiresIn))
+                .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }

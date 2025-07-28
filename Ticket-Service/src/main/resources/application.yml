@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: Ticket-Service
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ticketdb
+    driver-class-name: org.postgresql.Driver
+    username: ${TICKET_DATASOURCE_USERNAME}
+    password: ${TICKET_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASS}
+rabbitmq:
+  ticket:
+    exchange: ticket.v1.exchange
+    routingkey: ticket.criado
