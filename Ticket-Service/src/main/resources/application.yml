@@ -22,4 +22,7 @@ spring:
 rabbitmq:
   ticket:
     exchange: ticket.v1.exchange
-    routingkey: ticket.criado
+    routingkey:
+      created-ticket: ticket.criado
+server:
+  port: 8082
