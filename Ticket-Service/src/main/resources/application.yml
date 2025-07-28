@@ -7,7 +7,7 @@ spring:
     username: ${TICKET_DATASOURCE_USERNAME}
     password: ${TICKET_DATASOURCE_PASSWORD}
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true

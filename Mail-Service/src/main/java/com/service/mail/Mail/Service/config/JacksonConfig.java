@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JacksonConfig {
 
+    // Para incluir LocalDateTime na mensagem do Jackson converter
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();

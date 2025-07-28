@@ -2,7 +2,7 @@ package com.service.mail.Mail.Service.listener;
 
 import com.service.mail.Mail.Service.domain.model.TicketCreatedDto;
 import com.service.mail.Mail.Service.domain.model.UsuarioInfoDto;
-import com.service.mail.Mail.Service.domain.service.MailSenderService;
+import com.service.mail.Mail.Service.domain.service.TicketMailSender;
 import com.service.mail.Mail.Service.domain.service.UsuarioService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class MailListener {
 
     private final UsuarioService usuarioService;
-    private final MailSenderService mailSenderService;
+    private final TicketMailSender ticketMailSender;
 
-    public MailListener(UsuarioService usuarioService, MailSenderService mailSenderService) {
+    public MailListener(UsuarioService usuarioService, TicketMailSender ticketMailSender) {
         this.usuarioService = usuarioService;
-        this.mailSenderService = mailSenderService;
+        this.ticketMailSender = ticketMailSender;
     }
 
 
@@ -26,7 +26,7 @@ public class MailListener {
 
     @RabbitListener(queues = "${rabbitmq.ticket.queue}")
     public void ticketCriado(TicketCreatedDto dto){
-        mailSenderService.newTicketMail(dto);
+        ticketMailSender.sendNewTicketMail(dto);
     }
 
 }
